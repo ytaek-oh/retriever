@@ -1,0 +1,15 @@
+datasets:
+  nice:
+    data_dir: /home/appuser/datasets/nice/
+    data_type: images # [images|videos|features]
+
+    build_info:
+      annotations:
+        train:
+          url: /home/appuser/datasets/nice/discovery_nice_test_top1_ret_ids.json
+          storage: /home/appuser/datasets/nice/discovery_nice_test_top1_ret_ids.json
+        nice_val_split_test:
+          url: /home/appuser/datasets/nice/nice_val_split_test_ret_ids.json
+          storage:  /home/appuser/datasets/nice/nice_val_split_test_ret_ids.json
+      images:
+        storage: /home/appuser/datasets/nice/

@@ -1,0 +1,41 @@
+model:
+  arch: blip2_opt
+  model_type: caption_coco_opt2.7b
+  use_grad_checkpoint: False
+
+  # retrieval-augmented options
+  fuse_ret_feature: "prefix"  # [prefix, sum]
+  ret_length_cutoff: 32  # text features length of 32, -> 16 
+  ret_k: 2  # number of top-k retrived feature points to be aggregagated
+
+datasets:
+  nice: # name of the dataset builder
+    type: "retaug_top2_add5k_fusion"
+    vis_processor:
+        eval:
+          name: "blip_image_eval"
+          image_size: 364
+    text_processor:
+        eval:
+          name: "blip_caption"
+run:
+  task: nice_captioning
+  # optimizer
+  batch_size_train: 32
+  batch_size_eval: 16
+  num_workers: 8
+
+  max_len: 30
+  min_len: 8
+  num_beams: 5
+
+  seed: 42
+  output_dir: "output/BLIP2_eval/opt27b_retaug_top1_add5k_ret_2_fusion"
+
+  evaluate: True
+  test_splits: ["nice_test"]
+
+  device: "cuda"
+  world_size: 5
+  dist_url: "env://"
+  distributed: True

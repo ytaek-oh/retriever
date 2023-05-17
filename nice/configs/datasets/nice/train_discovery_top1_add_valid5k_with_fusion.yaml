@@ -1,0 +1,13 @@
+datasets:
+  nice:
+    data_dir: /home/appuser/datasets/nice/
+    data_type: images # [images|videos|features]
+
+    build_info:
+      annotations:
+        train:
+          url: /home/appuser/datasets/nice/discovery_nice_test_top1_add_valid5k_ret_ids.json
+          storage: /home/appuser/datasets/nice/discovery_nice_test_top1_add_valid5k_ret_ids.json
+          ret_features: /home/appuser/datasets/shutterstock/caption_features/text_feature_nice_discovery_top1_add_valid5k.h5
+      images:
+        storage: /home/appuser/datasets/nice/

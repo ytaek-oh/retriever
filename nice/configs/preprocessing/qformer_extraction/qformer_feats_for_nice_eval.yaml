@@ -1,0 +1,41 @@
+model:
+  arch: blip2_feature_extractor
+  model_type: pretrain 
+  load_pretrained: True
+  # 1st phase of pretrained
+  pretrained: "https://storage.googleapis.com/sfr-vision-language-research/LAVIS/models/BLIP2/blip2_pretrained.pth"
+  freeze_vit: True
+  max_txt_len: 32
+
+datasets:
+  shutterstock:  # name of the dataset builder
+    type: "extract_caption_features"
+    vis_processor:
+        eval:
+          name: "blip_image_eval"
+          image_size: 364
+    text_processor:
+        eval:
+          name: "blip_caption"
+
+run:
+  task: blip2_extract_q_former
+  data_root: ../datasets/
+
+  # optimizer
+  batch_size_train: 32
+  batch_size_eval: 128
+  num_workers: 4
+
+  seed: 42
+  output_dir: "output/BLIP2/Q_former_features"
+
+  evaluate: True
+  test_splits: ["nice_val", "nice_test", "nice_discovery_top1"]
+
+  device: "cuda"
+  world_size: 1
+  dist_url: "env://"
+  distributed: True
+
+  feature_mode: "text"  # ["text", "multimodal"]

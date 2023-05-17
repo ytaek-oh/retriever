@@ -1,0 +1,19 @@
+datasets:
+  shutterstock:
+    data_dir: /home/appuser/datasets/shutterstock/
+    data_type: images # [images|videos|features]
+
+    build_info:
+      annotations:
+        nice_val:
+          url: /home/appuser/datasets/shutterstock/shutterstock_retrieval_nice_val.json
+          storage:  /home/appuser/datasets/shutterstock/shutterstock_retrieval_nice_val.json
+        nice_test:
+          url: /home/appuser/datasets/shutterstock/shutterstock_retrieval_nice_test.json
+          storage:  /home/appuser/datasets/shutterstock/shutterstock_retrieval_nice_test.json
+        nice_discovery_top1:
+          url: /home/appuser/datasets/shutterstock/shutterstock_retrieval_discovery_nice_test_top1.json
+          storage: /home/appuser/datasets/shutterstock/shutterstock_retrieval_discovery_nice_test_top1.json
+
+      images:
+        storage: /home/appuser/datasets/shutterstock/

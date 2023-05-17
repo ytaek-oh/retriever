@@ -1,0 +1,24 @@
+datasets:
+  nice:
+    data_dir: /home/appuser/datasets/nice/
+    data_type: images
+
+    build_info:
+      annotations:
+        # Standard validation and test splits
+        nice_val:
+          url: /home/appuser/datasets/nice/nice_val.json
+          storage:  /home/appuser/datasets/nice/nice_val.json
+        test:
+          url: /home/appuser/datasets/nice/nice_test.json
+          storage: /home/appuser/datasets/nice/nice_test.json
+
+        # 4k - 1k split of validation data
+        nice_val_split_train:
+          url: /home/appuser/datasets/nice/nice_val_split_train.json
+          storage:  /home/appuser/datasets/nice/nice_val_split_train.json
+        nice_val_split_test:
+          url: /home/appuser/datasets/nice/nice_val_split_test.json
+          storage:  /home/appuser/datasets/nice/nice_val_split_test.json
+      images:
+        storage: /home/appuser/datasets/nice/

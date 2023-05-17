@@ -1,0 +1,43 @@
+# {'Bleu_1': 0.2285162487644913, 'Bleu_2': 0.1315609479753526, 'Bleu_3': 0.08297678440158456, 'Bleu_4': 0.0543169327826036, 'METEOR': 0.12033719189830469, 'ROUGE_L': 0.28921107441757704, 'CIDEr': 0.7967924239850317, 'SPICE': 0.21074455285579796}
+model:
+  arch: blip2_opt
+  model_type: caption_coco_opt2.7b
+  use_grad_checkpoint: False
+  load_finetuned: False  # temporary
+
+datasets:
+  nice: # name of the dataset builder
+    type: "split_4k"
+    vis_processor:
+        eval:
+          name: "blip_image_eval"
+          image_size: 364
+    text_processor:
+        eval:
+          name: "blip_caption"
+
+run:
+  task: nice_captioning
+  # optimizer
+  batch_size_train: 32
+  batch_size_eval: 16
+  num_workers: 4
+
+  max_len: 30
+  min_len: 8
+  num_beams: 5
+
+  seed: 42
+  output_dir: "output/BLIP2_eval/opt2.7b"
+
+  evaluate: True
+  test_splits: ["nice_val_split_test"]
+
+  device: "cuda"
+  world_size: 4
+  dist_url: "env://"
+  distributed: True
+
+  max_epoch: 30  # ?
+
+  memo: ""

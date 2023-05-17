@@ -1,0 +1,35 @@
+model:
+  arch: blip2_opt
+  model_type: caption_coco_opt2.7b
+  use_grad_checkpoint: False
+
+datasets:
+  nice: # name of the dataset builder
+    vis_processor:
+        eval:
+          name: "blip_image_eval"
+          image_size: 364
+    text_processor:
+        eval:
+          name: "blip_caption"
+run:
+  task: nice_captioning
+  # optimizer
+  batch_size_train: 16
+  batch_size_eval: 8
+  num_workers: 8
+
+  max_len: 30
+  min_len: 8
+  num_beams: 5
+
+  seed: 42
+  output_dir: "output/BLIP2/Caption_coco_opt2.7b"
+
+  evaluate: True
+  test_splits: ["nice_val"]
+
+  device: "cuda"
+  world_size: 4
+  dist_url: "env://"
+  distributed: True

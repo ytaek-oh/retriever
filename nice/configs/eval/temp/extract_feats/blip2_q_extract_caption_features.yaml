@@ -1,0 +1,49 @@
+model:
+  arch: blip2_feature_extractor
+  model_type: pretrain 
+  load_pretrained: True
+  # 1st phase of pretrained
+  pretrained: "https://storage.googleapis.com/sfr-vision-language-research/LAVIS/models/BLIP2/blip2_pretrained.pth"
+  freeze_vit: True
+  max_txt_len: 32
+
+datasets:
+  shutterstock:  # name of the dataset builder
+    # type: "nice_retrived_anns"
+    # type: "ret_aug_top2_add_4k_retrieved_anns_v2"  # for multi-modal feature
+    # type: "ret_aug_top2_add_5k_retrieved_anns"
+    # type: "ret_aug_top2_add_5k_retrieved_anns_v2"
+    # type: "ret_aug_top3_retrieved_anns"
+    type: "ret_aug_top1_retrieved_anns"
+    vis_processor:
+        eval:
+          name: "blip_image_eval"
+          image_size: 364
+    text_processor:
+        eval:
+          name: "blip_caption"
+
+run:
+  task: blip2_extract_q_former
+
+  # optimizer
+  batch_size_train: 32
+  batch_size_eval: 128
+  num_workers: 4
+
+  seed: 42
+  output_dir: "output/BLIP2/Q_former_features/pretrain"
+
+  evaluate: True
+  # test_splits: ["nice_split_test", "nice_real_test"]
+  # test_splits: ["nice_split_train", "nice_split_test", "nice_real_test"]
+  # test_splits: ["nice_train_top2_add4k", "nice_split_test", "nice_real_test"]
+  # test_splits: ["nice_train_top3_add4k", "nice_train_top3_add5k"]
+  test_splits: ["nice_train_top1_add4k", "nice_train_top1_add5k"]
+
+  device: "cuda"
+  world_size: 1
+  dist_url: "env://"
+  distributed: True
+
+  feature_mode: "text"  # ["text", "multimodal"]

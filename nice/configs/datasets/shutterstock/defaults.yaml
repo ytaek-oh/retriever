@@ -1,0 +1,12 @@
+datasets:
+  shutterstock:
+    data_dir: /home/appuser/datasets/shutterstock/
+    data_type: images # [images|videos|features]
+
+    build_info:
+      annotations:
+        val:
+          url: /home/appuser/datasets/shutterstock/shutterstock_1m.json
+          storage:  /home/appuser/datasets/shutterstock/shutterstock_1m.json
+      images:
+        storage: /home/appuser/datasets/shutterstock/

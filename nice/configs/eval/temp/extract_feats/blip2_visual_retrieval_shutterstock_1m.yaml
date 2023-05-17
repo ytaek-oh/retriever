@@ -1,0 +1,36 @@
+model:
+  arch: blip2_opt
+  model_type: caption_coco_opt2.7b
+  use_grad_checkpoint: False
+
+datasets:
+  shutterstock: # name of the dataset builder
+    vis_processor:
+        eval:
+          name: "blip_image_eval"
+          image_size: 364
+    text_processor:
+        eval:
+          name: "blip_caption"
+
+run:
+  task: blip2_faiss_construct
+  # optimizer
+  batch_size_train: 256
+  batch_size_eval: 256
+  num_workers: 32
+
+  max_len: 30
+  min_len: 8
+  num_beams: 5
+
+  seed: 42
+  output_dir: "output/BLIP2/faiss"
+
+  evaluate: True
+  test_splits: ["val"]
+
+  device: "cuda"
+  world_size: 1
+  dist_url: "env://"
+  distributed: False

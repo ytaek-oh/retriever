@@ -1,0 +1,51 @@
+model:
+  arch: blip2_opt
+  model_type: caption_coco_opt2.7b
+  use_grad_checkpoint: False
+
+datasets:
+  nice: # name of the dataset builder
+    # type: "ret_aug_zeroshot_training_top2_add_4k_standard"  # key: in builder
+    # type: "ret_aug_zeroshot_training_top2_add_5k_standard"  # key: in builder
+    # type: "ret_aug_top3_standard"
+    type: "ret_aug_top1_standard"
+    vis_processor:
+        eval:
+          name: "blip_image_eval"
+          image_size: 364
+    text_processor:
+        eval:
+          name: "blip_caption"
+
+
+run:
+  task: blip2_faiss_assign
+
+  # faiss
+  # this is file, and also located to datasets\shutterstock\shutterstock_knn_storage
+  data_storage_path: "nice/output/BLIP2/faiss/20230421094/shutterstock_1m"
+  # data_storage_path: "../datasets/shutterstock/shutterstock_knn_storage/shutterstock_1m"
+  retrieve_k: 60  # number to retrive
+  retrieve_max_k: 200  # maximum retrive
+  shutterstock_ann_path: "../../datasets/shutterstock/datasets/shutterstock_1m.json"
+  # shutterstock_ann_path: "../datasets/shutterstock/datasets/shutterstock_1m.json"
+
+  # optimizer
+  batch_size_train: 128
+  batch_size_eval: 128
+  num_workers: 8
+
+  max_len: 30
+  min_len: 8
+  num_beams: 5
+
+  seed: 42
+  output_dir: "output/BLIP2/faiss/ret_gen"
+
+  evaluate: True
+  test_splits: ["train_faiss_add4k", "train_faiss_add5k"]
+
+  device: "cuda"
+  world_size: 1
+  dist_url: "env://"
+  distributed: False

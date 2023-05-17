@@ -1,0 +1,48 @@
+model:
+  arch: blip2_opt
+  model_type: caption_coco_opt2.7b
+  use_grad_checkpoint: False
+
+datasets:
+  nice: # name of the dataset builder
+    type: "default"
+    vis_processor:
+        eval:
+          name: "blip_image_eval"
+          image_size: 364
+    text_processor:
+        eval:
+          name: "blip_caption"
+
+run:
+  task: blip2_faiss_assign
+
+  # faiss options
+  data_root: "../datasets"
+  data_storage_path: "../datasets/shutterstock/knn_storage/shutterstock_1m"
+
+  # retrieval options
+  discovery_topk: 1  # the number of retrieved samples for dataset discovery.
+  retrieve_k: 3  # number to retrive per query sample <=50
+  retrieve_max_k: 200  # maximum retrive
+  shutterstock_ann_path: "../datasets/shutterstock/shutterstock_1m.json"
+
+  # optimizer
+  batch_size_train: 128
+  batch_size_eval: 128
+  num_workers: 8
+
+  max_len: 30
+  min_len: 8
+  num_beams: 5
+
+  seed: 42
+  output_dir: "output/faiss/assign_shuterstock_1m_to_eval"
+
+  evaluate: True
+  test_splits: ["nice_val", "nice_val_split_train", "nice_val_split_test", "test"]
+
+  device: "cuda"
+  world_size: 1
+  dist_url: "env://"
+  distributed: False
