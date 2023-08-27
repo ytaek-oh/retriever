@@ -47,18 +47,19 @@ This paragraph includes the procedures for constructing (1) NICE and Shutterstoc
       knn_storage/
       shutterstock.csv
 ```
+<br />
 
-1. Download the [NICE dataset](https://nice.lgresearch.ai/) on the `${DATA_PATH}/nice` directory.
+1. Download the [NICE dataset](https://nice.lgresearch.ai/) on the `${DATA_PATH}/nice` directory. <br /><br />
 2. Create annotations for the NICE val and test splits by executing `utils/create_nice_annotations.py` as following:
 ```
 python utils/create_nice_annotations.py --data_path ${DATA_PATH}
 ```
 
 - This gives `nice_val.json` and `nice_test.json` on  `${DATA_PATH}/nice`.
-- Then, download the 4k-1k held-out train and valid splits based on the NICE 5k val split from [here](https://drive.google.com/drive/folders/11OonDbi9eN6WVMCZPMdZDN_yUZxVMBph?usp=sharing) to `${DATA_PATH}/nice`.
+- Then, download the 4k-1k held-out train and valid splits based on the NICE 5k val split from [here](https://drive.google.com/drive/folders/11OonDbi9eN6WVMCZPMdZDN_yUZxVMBph?usp=sharing) to `${DATA_PATH}/nice`. <br /><br />
 
 3. Download the list of Shutterstock image url and caption pairs from [here](https://github.com/mlfoundations/clip_quality_not_quantity) to `${DATA_PATH}/shutterstock`. Then preprocess the 1M of shutterstock dataset by following the instructions on [this notebook](./nice/datasets/download_scripts/DownloadShutterstockCaptions/shutterstock_preprocess.ipynb). 
-- After completing all the procedures, `shutterstock1m.json` is generated on `${DATA_PATH}/shutterstock`. Please note that since the images are downloaded from the shutterstock server, the resulting images will not be exactly matched upon different trials. 
+- After completing all the procedures, `shutterstock1m.json` is generated on `${DATA_PATH}/shutterstock`. Please note that since the images are downloaded from the shutterstock server, the resulting images will not be exactly matched upon different trials.  <br /><br />
 
 
 4. Please properly set the absolute paths for Shutterstock dataset from `nice/configs/datasets/shutterstock/shutterstock_1m.yaml`. Then to construct a FAISS index file that contains the shutterstock1m features, execute as following:
@@ -71,7 +72,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python faiss_construct.py \
 - This takes approximately 7 hours with 4 GPUs, consuming less than 24GB VRAM per GPU. 
 - This produces a FAISS index file named `shutterstock_1m` on `./output/faiss/construct_shutterstock_1m`. Please move it to `${DATA_PATH}/shutterstock/knn_storage`.  
 - The resulting file processed by ours can be found [here](https://drive.google.com/drive/folders/11i0mryEzcYzSj7Vova9yORh5Vxwzau3M?usp=sharing), but the shutterstock indices might be slightly different depending on the downloaded Shutterstock dataset.
-- Later, please make sure that the absolute paths are all correct in all the configuration files contained on `nice/configs/datasets`.
+- Later, please make sure that the absolute paths are all correct in all the configuration files contained on `nice/configs/datasets`. <br /><br />
 
 5. For each of the examples in the NICE splits, assign the indices of the shutterstock1m samples based on the constructed FAISS index file by executing following commands respectively. Please make sure that the variables for data path are correct for the following configuration files.
 ```
@@ -87,7 +88,7 @@ CUDA_VISIBLE_DEVICES=0 python faiss_assign.py \
     --cfg-path nice/configs/preprocessing/faiss/blip2_assign_shutterstock_1m_to_discovery_data.yaml \
     --options run.data_root ${DATA_ROOT} 
 ``` 
-- This command gives `discovery_nice_test_top1_ret_ids.json` on `${DATA_PATH}/nice` and `shutterstock_retrieval_discovery_nice_test_top1.json` on `${DATA_PATH}/shutterstock` respectively.
+- This command gives `discovery_nice_test_top1_ret_ids.json` on `${DATA_PATH}/nice` and `shutterstock_retrieval_discovery_nice_test_top1.json` on `${DATA_PATH}/shutterstock` respectively. <br /><br />
 
 6.  To extract caption features for the retrieved examples from Shutterstock, 
 ```
@@ -96,7 +97,7 @@ python -m torch.distributed.run --nproc_per_node=1 --master_port=29502 extract_f
   --options run.world_size 1 \
   run.data_root ${DATA_ROOT}
 ```
-- This command gives `text_feature_nice_{val, test, discovery_top1}.h5` on `${DATA_PATH}/shutterstock/caption_features`.
+- This command gives `text_feature_nice_{val, test, discovery_top1}.h5` on `${DATA_PATH}/shutterstock/caption_features`. <br /><br />
 
 7. Concatenate the NICE validation data (5k whole and held-out 4k respectively) with the discovered dataset.
 ```
@@ -118,6 +119,7 @@ python utils/concatenate_dataset_with_feature.py --data_root ${DATA_ROOT} \
     --anns_save_name discovery_nice_test_top1_add_split4k_ret_ids.json
 ``` 
 
+<br />
 
 ## Train
 The cases for training dataset can include (1) held-out NICE validation 4k splits (supervised) *with or without retrieval-based fusion*, (2) samples from the dataset discovery process with Top-1 metric only (total **10901** samples) *with or without retrieval-based fusion*, (3) combination of held-out NICE validation **4k** splits and the discovered data (total **14901** samples) *with or without retrieval-based fusion*, and (4) combination of full NICE validation set and the discovered data (total **15901** samples) *with retrieval-based fusion only*, for submission to the test server.  Please refer to the training configurations for each cases on `nice/configs/train/blip2_vig_g_opt2.7b/`. Some example scripts for training are given as:
