@@ -35,6 +35,7 @@ The code is tested with the following environment.
 - CUDA 11.3
 - Python 3.7
 - PyTorch 1.12.1
+- LAVIS 1.0.2 
 - Quadro RTX 8000 (Mem: 45GB) *4 GPUs 
 
 
@@ -44,6 +45,9 @@ git clone https://github.com/ytaek-oh/retriever.git && cd retriever/docker
 docker build -t retriever:v0 .  # see Dockfile if needed.
 ./run_docker.sh
 ```
+
+Since this codebase directly inherits the [LAVIS](https://github.com/salesforce/LAVIS) project and makes minimal modifications, understanding the code structure and basic usage of LAVIS can be helpful to play with this codebase.
+
 
 ## Preprocessing
 This paragraph includes the procedures for constructing (1) NICE and Shutterstock datasets, (2) Constructing FAISS index file as the memory dataset in the paper and following annotations from retrieval, (3) pre-computing retrieved caption features, and finally (4) annotations for training and testing. 
@@ -187,7 +191,7 @@ We release the training logs and some checkpoints for the results on tables of o
 
 ## Acknowledgements
 
-This project inherits the architecture of the [lavis](https://github.com/salesforce/LAVIS) project from Salesforce.
+This project inherits the architecture of the [lavis](https://github.com/salesforce/LAVIS) project from Salesforce. We appreciate for the wonderful project.
 
 
 
