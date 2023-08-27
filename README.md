@@ -26,7 +26,7 @@ This report introduces Retriever, our solution for the 2023 Challenge on zero-sh
 - [x] Documentation
 - [x] Share technical report
 - [x] Writing bash scripts for training and evaluation
-- [ ] Share FAISS index file, checkpoint, and logs
+- [x] Share FAISS index file, checkpoint, and logs
 
 ## Install
 
@@ -181,8 +181,8 @@ python -m torch.distributed.run --nproc_per_node=4 evaluate.py \
   ```
 
 
-## Training logs and checkpoints
-Will be released soon.
+## Training logs, evaluated captions and checkpoints
+We release the training logs and some checkpoints for the results on tables of our technical report [here](https://drive.google.com/drive/folders/12-0UOFBhdMGJ2nmqM8-3-SL7olF154Uv?usp=sharing). The results from Table 3 include corresponding checkpoints.
 
 
 ## Acknowledgements
