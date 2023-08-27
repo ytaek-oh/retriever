@@ -5,7 +5,9 @@ A second place winning solution to the 2023 Challenge on zero-shot image caption
 
 
 > Technical Report of NICE Challenge at CVPR 2023: Retrieval-based Data Discovery and Fusion for Zero-shot Image Captioning
+> 
 > [Youngtaek Oh](https://ytaek-oh.github.io), [Jae Won Cho](https://chojw.github.io/), [Dong-Jin Kim](https://sites.google.com/site/djkimcv/), [In So Kweon](http://rcv.kaist.ac.kr/index.php?mid=rcv_faculty), and [Junmo Kim](https://siit.kaist.ac.kr/Faculty)
+> 
 > Technical report [[pdf](https://ytaek-oh.github.io/assets/pdf/nice_report.pdf)]
 
 
