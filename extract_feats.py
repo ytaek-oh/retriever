@@ -1,8 +1,8 @@
 import argparse
 
-from lavis.common.config import Config
 from lavis.common.dist_utils import init_distributed_mode
 from lavis.common.logger import setup_logger
+from nice.common.config import Config
 from nice.common.utils import setup_seeds
 from nice.runners.runner_base import RunnerBase
 from nice.tasks import Blip2ExtractQFormer

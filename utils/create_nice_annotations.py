@@ -8,7 +8,7 @@ import pandas as pd
 
 def argument_parser():
     parser = argparse.ArgumentParser(description="Training")
-    parser.add_argument("--data_path", default="../datasets/nice", help="path to dataset.")
+    parser.add_argument("--data_path", default="../datasets", help="path to dataset.")
     return parser
 
 
@@ -55,7 +55,7 @@ def create_test_anns(data_path):
 
 def main():
     args = argument_parser().parse_args()
-    data_path = args.data_path
+    data_path = os.path.join(args.data_path, "nice")
     create_val_anns(data_path)
     create_test_anns(data_path)
 
