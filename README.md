@@ -1,4 +1,5 @@
 
+
 # Retrieval-based Data Discovery and Fusion for Zero-shot Image Captioning
 
 A second place winning solution to the 2023 Challenge on zero-shot image captioning evaluation at [CVPR 2023 NICE Workshop](https://nice.lgresearch.ai/).
@@ -27,6 +28,22 @@ This report introduces Retriever, our solution for the 2023 Challenge on zero-sh
 - [x] Writing bash scripts for training and evaluation
 - [ ] Share FAISS index file, checkpoint, and logs
 
+## Install
+
+The code is tested with the following environment.
+- Ubuntu 20.04
+- CUDA 11.3
+- Python 3.7
+- PyTorch 1.12.1
+- Quadro RTX 8000 (Mem: 45GB) *4 GPUs 
+
+
+To install requirements, we provide a docker script with one-click installation of the dependencies for your convenience. 
+```setup
+git clone https://github.com/ytaek-oh/retriever.git && cd retriever/docker
+docker build -t retriever:v0 .  # see Dockfile if needed.
+./run_docker.sh
+```
 
 ## Preprocessing
 This paragraph includes the procedures for constructing (1) NICE and Shutterstock datasets, (2) Constructing FAISS index file as the memory dataset in the paper and following annotations from retrieval, (3) pre-computing retrieved caption features, and finally (4) annotations for training and testing. 
