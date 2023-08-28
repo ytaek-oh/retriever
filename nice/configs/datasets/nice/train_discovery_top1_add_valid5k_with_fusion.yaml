@@ -2,7 +2,8 @@ datasets:
   nice:
     data_dir: /home/appuser/datasets/nice/
     data_type: images # [images|videos|features]
-
+    max_ret: 3
+    
     build_info:
       annotations:
         train:
