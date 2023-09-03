@@ -54,7 +54,7 @@ This paragraph includes the procedures for constructing (1) NICE and Shutterstoc
 
 *NOTE. The path for the dataset is specified as ${DATA_PATH}. As a reference, our directory tree for the project is set as following for our environment, but this can be changed on your preference.*
 ```
-./
+/home/appuser/  # default path inside the docker environment.
   retriever/
     train.py
     ...
