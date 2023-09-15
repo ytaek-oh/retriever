@@ -196,11 +196,21 @@ This project inherits the architecture of the [lavis](https://github.com/salesfo
 
 
 ## Citation
-If you find our work useful for your research, please cite with the following bibtex:
+If you find our work useful for your research, please cite with the following bibtex. The former is the bibtex for our technical report, and the later is for the challenge report released by the workshop organizers.
+
 ```bibtex
 @article{ohtechnical,
   title={Technical Report of NICE Challenge at CVPR 2023: Retrieval-based Data Discovery and Fusion for Zero-shot Image Captioning},
   author={Oh, Youngtaek and Cho, Jae Won and Kim, Dong-Jin and Kweon, In So and Kim, Junmo},
   note={\url{https://ytaek-oh.github.io/assets/pdf/nice_report.pdf}}
+}
+```
+
+```bibtex
+@article{kim2023nice,
+  title={NICE 2023 Zero-shot Image Captioning Challenge},
+  author={Kim, Taehoon and Ahn, Pyunghwan and Kim, Sangyun and Lee, Sihaeng and Marsden, Mark and Sala, Alessandra and Kim, Seung Hwan and Lee, Honglak and Bae, Kyounghoon and Han, Bohyung and others},
+  journal={arXiv preprint arXiv:2309.01961},
+  year={2023}
 }
 ```
